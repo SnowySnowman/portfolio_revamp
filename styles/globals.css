@@ -1,0 +1,31 @@
+html, body, #__next {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  height: 100%;
+}
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+:root {
+  --white: #fcf8f3;
+  --cream: #F8F1E7;
+  --charcoal: #3E3E3E;
+  --tomato: #D9644A;
+  --spice: #A37C27;
+}
+
+body {
+  background: var(--white);
+  color: var(--charcoal);
+  font-family: 'Montserrat', sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+h1,h2,h3 {
+  font-family: 'Playfair Display', serif;
+}

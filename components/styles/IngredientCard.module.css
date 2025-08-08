@@ -1,0 +1,37 @@
+/* components/styles/IngredientCard.module.css */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--tomato);
+  color: white;
+  border-radius: 2rem;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-10px) rotate(3deg);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}
+
+/* components/styles/IngredientCard.module.css */
+.link {
+  display: inline-block;
+  margin: 1rem;
+  /* you can control grid placement on the parent instead */
+}
+
+.icon {
+  width: 120px;    /* or whatever size you like */
+  height: 120px;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.icon:hover {
+  transform: translateY(-8px) scale(1.05) rotate(2deg);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+}
+

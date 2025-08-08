@@ -1,0 +1,84 @@
+/* styles/Layout.module.css */
+
+/* wrapper just for context */
+.wrapper { position: relative; }
+
+/* your header stays fixed height or auto */
+.header {
+  position: relative;        /* so subHeader and header height are measured */
+  background: white;
+  z-index: 10;
+}
+
+/* container for logo + nav */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* collapsible subHeader */
+.subHeader {
+  /* make the whole thing a flex container */
+  display: flex;
+  align-items: center;
+
+  /* space between your logo (h1) and the nav */
+  justify-content: space-between;
+
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.subHeader.open {
+  max-height: 100px;         /* enough for your content */
+  padding: 0 1rem 1rem;
+}
+.subHeader.closed {
+  max-height: 0;
+  padding: 0 1rem;
+}
+
+/* move nav to the right and space out its links */
+.nav {
+  display: flex;
+  gap: 1rem;           /* adjust this to taste */
+  margin-left: auto;   /* pushes the nav all the way right */
+}
+
+/* if you want a little breathing room around the links */
+.navLink {
+  padding: 0.25rem 0.5rem;
+  /* you can also add hover styles here if you’d like */
+}
+
+/* toggleButton styles */
+.toggleButton {
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* when header is OPEN: place button immediately below header */
+.toggleButton.open {
+  position: absolute;
+  /* header’s bottom edge = header height + subHeader open height */
+  top: calc(1rem /* header padding */ + /* header content height */ 2rem + 
+            /* subHeader open height */ 65px);
+}
+
+/* when header is CLOSED: fixed top-center */
+.toggleButton.closed {
+  position: fixed;
+  top: 0.5rem;
+}

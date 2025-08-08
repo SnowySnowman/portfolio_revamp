@@ -1,37 +1,48 @@
-/* components/styles/IngredientCard.module.css */
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--tomato);
-  color: white;
-  border-radius: 2rem;
-  padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.card:hover {
-  transform: translateY(-10px) rotate(3deg);
-  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
-}
-
-/* components/styles/IngredientCard.module.css */
 .link {
   display: inline-block;
-  margin: 1rem;
-  /* you can control grid placement on the parent instead */
+  transition: transform 200ms ease;
+}
+.link:hover {
+  transform: scale(1.1);
 }
 
+/* 2) Inner container to position the overlay */
+.cardInner {
+  position: relative;
+  width: 150px;   /* <-- much larger now */
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3) The SVG itself */
 .icon {
-  width: 120px;    /* or whatever size you like */
-  height: 120px;
-  cursor: pointer;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  width: 100%;
+  height: 100%;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.link:hover .icon {
+  opacity: 0.6;   /* fade the icon */
+  transform: translateY(-6px) scale(1.05);
 }
 
-.icon:hover {
-  transform: translateY(-8px) scale(1.05) rotate(2deg);
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+/* 4) The title overlay */
+.overlay {
+  position: absolute;
+  inset: 0;                 /* shorthand for top/right/bottom/left: 0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: white;
+  /* background: rgba(255, 255, 255, 0.5); */
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  text-shadow: 1px 1px gray;
 }
 
+.link:hover .overlay {
+  opacity: 1;
+}

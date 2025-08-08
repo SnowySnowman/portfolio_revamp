@@ -13,7 +13,10 @@ interface Props {
 export default function IngredientCard({ title, slug, Icon }: Props) {
   return (
     <Link href={`/projects/${slug}`} className={styles.link}>
-      <Icon aria-label={title} className={styles.icon} />
+      <div className={styles.cardInner}>
+        <Icon aria-label={title} className={styles.icon} />
+        <span className={styles.overlay}>{title}</span>
+      </div>
     </Link>
   )
 }

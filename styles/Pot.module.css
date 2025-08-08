@@ -1,55 +1,11 @@
 .container {
-  position: relative;
-  padding-bottom: 8rem; /* room for the pot */
-}
-
-.pot {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 600px;
-  height: 200px;
-  background: linear-gradient(to top, #555 0%, #777 100%);
-  border-top-left-radius: 50% 40%;
-  border-top-right-radius: 50% 40%;
-  box-shadow: inset 0 10px 30px rgba(0,0,0,0.4);
-  overflow: hidden;
-}
-
-.container {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
   position: relative;
+  --final-dish-size: 300px;
 }
 
-/* the big round “pan” in the background */
-.pot {
-  width: 400px;
-  height: 350px;
-  border: 4px solid #333;
-  border-radius: 50% / 40%;
-  background: rgba(255,255,255,0.8);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  z-index: 1;
-}
-
-/* make the pot clickable */
-.potClickable {
-  display: block;
-  width: 400px;
-  height: 350px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  z-index: 2;
-}
 
 /* arrows on either side */
 .arrowLeft,
@@ -61,6 +17,67 @@
   text-decoration: none;
   transform: translateY(-50%);
   z-index: 3;
+  border:none;
+  background: none;
+  background-color: transparent;
+  cursor:pointer;
+
+  transition: transform 200ms ease;
 }
-.arrowLeft { left: 0;  padding-left: 1rem }
-.arrowRight { right: 0; padding-right: 1rem }
+
+.arrowLeft:hover,
+.arrowRight:hover {
+  /* keep the vertical centering + add a scale */
+  transform: translateY(-50%) scale(1.2);
+}
+
+.arrowLeft { 
+    left: -20%;  
+    padding-left: 1rem 
+}
+.arrowRight { 
+    right: -20%; 
+    padding-right: 1rem 
+}
+
+
+/* 1) the wrapper now “owns” that exact width/height */
+.finalDishCard {
+  position: relative;
+  display: inline-flex;                /* inline so it flows with text, flex so centring is easy */
+  width: var(--final-dish-size);
+  height: var(--final-dish-size);
+  cursor: pointer;
+}
+
+/* 2) make the SVG fill that box exactly */
+.finalDishIcon {
+  display: block;                      /* kill that inline baseline offset */
+  width: 100%;
+  height: 100%;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* 3) overlay now perfectly matches the card’s box */
+.finalDishOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;                       /* centre the text both ways */
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 1px 1px gray;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+}
+
+/* 4) hover states unchanged, but now only the icon area responds */
+.finalDishCard:hover .finalDishIcon {
+  transform: scale(1.1);
+  opacity: 0.6;
+}
+.finalDishCard:hover .finalDishOverlay {
+  opacity: 1;
+}

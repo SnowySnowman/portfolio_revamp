@@ -8,6 +8,7 @@ import TomatoIcon from '../components/icons/TomatoIcon'
 import BasilIcon from '../components/icons/BasilIcon'
 import SpaghettiIcon from '../components/icons/SpaghettiIcon'
 import MushroomIcon from '../components/icons/MushroomIcon'
+import FinalDishIcon from '../components/icons/FinalDishIcon'
 
 type Project = { title: string, slug: string, Icon: React.FC<React.SVGProps<SVGSVGElement>> }
 type YearData = {
@@ -31,7 +32,7 @@ const allYears: YearData[] = [
   },
   {
     year: 2025,
-    theme: 'Prawn Mushroom Fried Rice',
+    theme: 'Omelette',
     photoPath: '/photos/prawn-mushroom-fried-rice.jpg',
     projects: [
       { title: 'Emotion CNN', slug: 'emotion-cnn', Icon: MushroomIcon },
@@ -65,35 +66,38 @@ export default function Home() {
           ◀︎
         </button>
 
-        {/* Icon grid */}
+        {/* Icons */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '1.5rem',
-            padding: '2rem 1rem',
+            display: 'flex',
             justifyItems: 'center',
+            justifyContent: 'center',
             zIndex: 2,
             position: 'relative',
+            gap: '1.5rem',  
+            width: '100%',
           }}
         >
-          {projects.map(p => {
-            const Icon = p.Icon
-            return (
-              <Link href={`/${p.slug}`} key={p.slug} className="flex flex-col items-center">
-                <Icon className="w-12 h-12 hover:scale-110 transition-transform" />
-                <span style={{ fontSize: '0.75rem', marginTop: '0.25rem' }}>
-                  {p.title}
-                </span>
-              </Link>
-            )
-          })}
+          {projects.map(({ title, slug, Icon }) => (
+            <IngredientCard
+              key={slug}
+              title={title}
+              slug={slug}
+              Icon={Icon}
+            />
+          ))}
         </div>
 
         {/* Center “pot” linking to real photo */}
-        <Link href={photoPath} className={potStyles.potClickable}>
-          <div className={potStyles.pot} />
-        </Link>
+        {/* Bottom‐center “View food photo” button */}
+        <div className={potStyles.finalDishWrapper}>
+          <Link href={photoPath} className={potStyles.finalDishCard}>
+              <FinalDishIcon className={potStyles.finalDishIcon} />
+              <span className={potStyles.finalDishOverlay}>
+                View food photo
+              </span>
+          </Link>
+        </div>
 
         {/* Right “carousel” arrow */}
         <button onClick={next} className={potStyles.arrowRight}>

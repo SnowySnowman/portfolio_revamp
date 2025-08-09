@@ -1,13 +1,21 @@
 /* styles/Layout.module.css */
 
 /* wrapper just for context */
-.wrapper { position: relative; }
+.wrapper { position: relative; padding-top: 15px; }
 
 /* your header stays fixed height or auto */
 .header {
-  position: relative;        /* so subHeader and header height are measured */
-  background: white;
+  /* position: relative; 
   z-index: 10;
+  margin: 12px auto 0;
+  margin-top: 0; */
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;   /* ← centres the child */
+  padding-inline: 16px;      /* gutter so it never kisses the edges */
+  margin-top: 12px;          /* remove margin: auto */
+  overflow-x: hidden;
 }
 
 /* container for logo + nav */
@@ -18,27 +26,51 @@
   padding: 1rem;
 }
 
-/* collapsible subHeader */
 .subHeader {
-  /* make the whole thing a flex container */
   display: flex;
   align-items: center;
-
-  /* space between your logo (h1) and the nav */
   justify-content: space-between;
 
+  /* keep width stable in both states */
+  width: min(1000px, 100%);
+  margin: 0;
+
+  /* keep horizontal padding constant */
+  padding: 0 70px 0 50px;
+
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+
+  box-sizing: border-box;        /* ← move this here */
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease;
+
+  transition:
+    max-height 250ms ease,
+    padding-top 200ms ease,
+    padding-bottom 200ms ease,
+    opacity 200ms ease,
+    border-color 200ms ease;
 }
 
 .subHeader.open {
-  max-height: 100px;         /* enough for your content */
-  padding: 0 1rem 1rem;
+  max-height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  opacity: 1;
+  border-color: #d1d5db;
 }
+
 .subHeader.closed {
   max-height: 0;
-  padding: 0 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  border-color: transparent;
+  pointer-events: none;
+  /* transform: none;  (ensure you removed the translateY) */
 }
+
 
 /* move nav to the right and space out its links */
 .nav {
@@ -93,7 +125,8 @@
   width: 100%;
   height: 4rem;          /* or however tall your footer is */
   line-height: 4rem;     /* vertically center the text */
-  background: #f5f5f5;   /* your footer background */
+  background: #ffffff;   /* your footer background */
+  background-color: #ffffff;
   text-align: center;
   z-index: 100;          /* above other content */
 }
